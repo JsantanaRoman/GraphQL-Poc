@@ -18,8 +18,11 @@ class MyApp extends StatelessWidget {
     // create Client
     final GraphQLClient client = GraphQLClient(
       link: HttpLink(
-          'https://swapi-graphql.netlify.app/.netlify/functions/index'),
-      cache: GraphQLCache(store: HiveStore()),
+        'https://swapi-graphql.netlify.app/.netlify/functions/index',
+      ),
+      cache: GraphQLCache(
+        store: HiveStore(),
+      ),
     );
 
     // create Notifier
@@ -31,10 +34,13 @@ class MyApp extends StatelessWidget {
       client: clientNotifier,
       child: MaterialApp(
         title: 'Graphql POC',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+        ),
         initialRoute: '/',
         routes: {
           '/': (context) => const WelcomeScreen(),
-          '/poc': (context) => const ExampleScreen(),
+          '/poc': (context) => ExampleScreen(),
         },
       ),
     );
