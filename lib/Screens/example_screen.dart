@@ -1,24 +1,10 @@
-import "dart:math";
-
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:graphql_poc/services/movie_service.dart';
 import 'package:lottie/lottie.dart';
 
 class ExampleScreen extends StatelessWidget {
-  ExampleScreen({Key? key}) : super(key: key);
-  static Random rnd = Random();
-  static const list = ['title', 'error', 'director', 'error2'];
-  static final element = list[rnd.nextInt(list.length)];
-
-  final String getMovies = """
-    query Query {
-    allFilms {
-      films {
-        $element
-      }
-    }
-  }
-  """;
+  const ExampleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +18,7 @@ class ExampleScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Query(
-              options: QueryOptions(
-                document: gql(getMovies),
-                fetchPolicy: FetchPolicy.noCache,
-              ),
+              options: MovieService.movieTitleOptions,
               builder: (
                 QueryResult result, {
                 VoidCallback? refetch,

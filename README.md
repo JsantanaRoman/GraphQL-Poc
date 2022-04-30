@@ -1,16 +1,17 @@
 # graphql_poc
 
-A new Flutter project.
+A new Flutter project. To test implementetion of GraphQL_Flutter
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Related Resources
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- testing - https://pub.dev/packages/faker/example
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- read - https://medium.com/@v.ditsyak/ultimate-toolchain-to-work-with-graphql-in-flutter-13aef79c6484
+
+- documentation - https://github.com/zino-hofmann/graphql-flutter/tree/master/packages/graphql_flutter#graphql-provider
+
+- API - https://studio.apollographql.com/public/star-wars-swapi/explorer?variant=current

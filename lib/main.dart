@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const WelcomeScreen(),
-          '/poc': (context) => ExampleScreen(),
+          '/poc': (context) => const ExampleScreen(),
         },
       ),
     );
