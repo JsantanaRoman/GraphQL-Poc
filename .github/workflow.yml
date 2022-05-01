@@ -1,19 +1,16 @@
-name: Flutter Web CI
+name: Flutter Build
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
   build:
+    name: flutter build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '2.10.x'
-    - run: flutter pub get
-    # - run: flutter test
-    - run: flutter analyze
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.x'
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test --coverage
