@@ -3,12 +3,32 @@ import 'package:graphql_poc/Screens/example_screen.dart';
 import 'package:graphql_poc/Screens/welcome_screen.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:testfairy_flutter/testfairy_flutter.dart';
 
 void main() async {
-  await initHiveForFlutter();
-  await Hive.openBox('testBox');
+  HttpOverrides.global = TestFairy.httpOverrides();
 
-  runApp(const MyApp());
+  runZonedGuarded(() async {
+    try {
+      FlutterError.onError = (details) => TestFairy.logError(details.exception);
+      await TestFairy.begin("SDK-xJlEdGI2");
+      await initHiveForFlutter();
+      await Hive.openBox('testBox');
+      // Call `await TestFairy.begin()` or any other setup code here.
+
+      runApp(const TestFairyGestureDetector(child: MyApp()));
+    } catch (error) {
+      TestFairy.logError(error);
+    }
+  }, (e, s) {
+    TestFairy.logError(e);
+  }, zoneSpecification: ZoneSpecification(
+    print: (self, parent, zone, message) {
+      TestFairy.log(message);
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {

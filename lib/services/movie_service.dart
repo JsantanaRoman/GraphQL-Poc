@@ -5,7 +5,7 @@ class MovieService {
     query Query {
     allFilms {
       films {
-        title
+        titles
       }
     }
   }
