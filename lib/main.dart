@@ -18,7 +18,7 @@ void main() async {
       await Hive.openBox('testBox');
       // Call `await TestFairy.begin()` or any other setup code here.
 
-      runApp(const TestFairyGestureDetector(child: MyApp()));
+      runApp(TestFairyGestureDetector(child: MyApp()));
     } catch (error) {
       TestFairy.logError(error);
     }
@@ -32,23 +32,22 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final GraphQLClient client = GraphQLClient(
+    link: HttpLink(
+      'https://swapi-graphql.netlify.app/.netlify/functions/index',
+    ),
+    cache: GraphQLCache(
+      store: HiveStore(),
+    ),
+  );
+  // create Notifier
+  late final ValueNotifier<GraphQLClient> clientNotifier =
+      ValueNotifier<GraphQLClient>(client);
+
   @override
   Widget build(BuildContext context) {
-    // create Client
-    final GraphQLClient client = GraphQLClient(
-      link: HttpLink(
-        'https://swapi-graphql.netlify.app/.netlify/functions/index',
-      ),
-      cache: GraphQLCache(
-        store: HiveStore(),
-      ),
-    );
-
-    // create Notifier
-    late final ValueNotifier<GraphQLClient> clientNotifier =
-        ValueNotifier<GraphQLClient>(client);
-
     // Wrap App in GraphQLProvider
     return GraphQLProvider(
       client: clientNotifier,
